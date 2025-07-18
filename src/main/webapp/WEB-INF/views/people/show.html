@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+</head>
+<body>
+<p th:text="${person.getFullName() + ', ' + person.getYearOfBirth()}">VALUE</p>
+<br/>
+<hr/>
+<div th:switch="${books.size()}">
+    <div th:case="'0'"><p>Человек пока не взял ни одной книги</p></div>
+    <div th:case="*">
+        <p style="font-weight: bold;margin: 10px 0; "> Книги</p>
+        <ul style="list-style-type: none; padding: 0; margin: 0; " >
+            <li th:each="book : ${books}">
+                <span th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear_of_publish()}">VALUE</span>
+            </li>
+        </ul>
+        <hr/>
+    </div>
+</div>
+
+<br/>
+
+<form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getId()})}">
+    <button style="margin-bottom: 5px">Edit</button>
+</form>
+
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+</body>
+</html>
